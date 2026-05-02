@@ -17,19 +17,15 @@ function App() {
   };
 
   const handleNextLetter = () => {
-    setCurrentLetter((prev) => {
-      const code = prev.charCodeAt(0);
-      return String.fromCharCode(code >= 90 ? 65 : code + 1);
-    });
+    if (workspaceRef.current) workspaceRef.current.nextLetter();
   };
 
   return (
     <div className="w-screen h-screen bg-black overflow-hidden relative">
       <TracingWorkspace
         ref={workspaceRef}
-        currentLetter={currentLetter}
         setCanUndo={setCanUndo}
-        onNextLetter={handleNextLetter}
+        onLetterChange={setCurrentLetter}
       />
       <Toolbar
         onUndo={handleUndo}
